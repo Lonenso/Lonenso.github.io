@@ -64,7 +64,8 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-startup" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-startup" class="article article-type-post" itemscope
+  itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/12/startup/" class="article-date">
   <time datetime="2020-05-12T07:39:58.000Z" itemprop="datePublished">2020-05-12</time>
@@ -74,19 +75,19 @@
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
+    <header class="article-header">
+      
   
     <h1 itemprop="name">
       <a class="article-title" href="/2020/05/12/startup/">记Hexo + Github Pages 建博客</a>
     </h1>
   
 
-      </header>
+    </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天心血来潮, 想要重新用github建立个博客. 官方的<a href="https://pages.github.com/" target="_blank" rel="noopener">教程</a>不错. 这里记录下遇到的问题</p>
+      <p>今天心血来潮, 想要重新用github建立个博客. 官方的<a href="https://pages.github.com/" target="_blank" rel="noopener">教程</a>不错. 这里记录下遇到的问题</p>
 <p>通过两仓库或两分支的操作, 把博客内容区和工作区分开, 同时跟踪和保留工作现场(备份). </p>
 <p>这里我选择两仓库, 工作区私有, 内容区公开. 使用官方的<a href="https://hexo.io/docs/github-pages.html#Private-repository" target="_blank" rel="noopener">工具</a>, 非常方便. </p>
 <p>搜索引擎收录问题, 谷歌搜索 </p>
@@ -94,6 +95,11 @@
 <p>这时候网站没有被收录, 搜索结果中有个 google search console, 根据提示完成网站认证的添加.</p>
 <p>我选择的是将html文件放到站点下, 使得<a href="https://lonenso.github.io/xxxx.html">https://lonenso.github.io/xxxx.html</a> 能够访问到该文件.</p>
 <p>也就是说, 本地<a href="https://localhost:4000/xxxx.html" target="_blank" rel="noopener">https://localhost:4000/xxxx.html</a> 能够访问到该<strong>原</strong>文件, 不是被渲染后的, 配置<a href="https://hexo.io/docs/configuration.html#Directory" target="_blank" rel="noopener">skip_render</a>. </p>
+<p>接下来增加评论功能, 注册disqus, 根据指引, 最终需要手动将html代码嵌入页面中.</p>
+<p>hexo的默认主题landscape下的article.ejs, 文件末尾有一部分和disqus给的html代码很像, 把disqus给的html代码 调整放到这里, 并且把写死的disqus_shortname替换成变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname)&#123; %&gt;</span><br><span class="line">&lt;section id&#x3D;&quot;comments&quot;&gt;</span><br><span class="line">...</span><br><span class="line">&lt;&#x2F;section&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在_config.yml中配置disqus_shortname即可</p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
 <li><a href="https://pages.github.com/" target="_blank" rel="noopener">https://pages.github.com/</a></li>
 <li><a href="http://hexo.io/" target="_blank" rel="noopener">http://hexo.io/</a></li>
@@ -103,7 +109,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka3rj71k0000mwsreli528zo" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka3ta99u00000gsr4mv512mn" class="article-share-link">Share</a>
+      
+      <a href="https://lonenso.github.io/2020/05/12/startup/#disqus_thread" class="article-comment-link">留言</a>
       
       
     </footer>
@@ -173,6 +181,18 @@
   
 </nav>
     
+<script>
+  var disqus_shortname = 'lonenso-github-io';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
