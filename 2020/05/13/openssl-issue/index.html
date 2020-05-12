@@ -18,17 +18,17 @@ ga('send', 'pageview');
 
 
   
-  <title>整理360+条书签到75条 | Lonenso</title>
+  <title>源码编译openssl时遇到的疑难杂症 | Lonenso</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近觉得自己书签数量太多, 内容太杂, 清理了一波. 觉得自己有些地方做的不好  我有一个稍后看的文件夹, 下面的网页太多了, 都是些放了, 但没时间看的, 或者其实没什么用的网页 收藏了一些网课&#x2F;教程, 其实没必要, 等需要了再搜索, 一样的效果 收藏了比较多的科普&#x2F;教程文章,  收藏了一些在某一时刻解决了问题的文章, 其中有一些掌握了, 仍然收藏了. 有一些没整理到笔记中. 习惯性按ctrl">
+  <meta name="description" content="环境centos 6.5openssl 1.1.1d 安装步骤123456789101112curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gztar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gzcd &amp;#x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="整理360+条书签到75条">
-<meta property="og:url" content="https://lonenso.github.io/2020/05/12/clean-bookmark/index.html">
+<meta property="og:title" content="源码编译openssl时遇到的疑难杂症">
+<meta property="og:url" content="https://lonenso.github.io/2020/05/13/openssl-issue/index.html">
 <meta property="og:site_name" content="Lonenso">
-<meta property="og:description" content="最近觉得自己书签数量太多, 内容太杂, 清理了一波. 觉得自己有些地方做的不好  我有一个稍后看的文件夹, 下面的网页太多了, 都是些放了, 但没时间看的, 或者其实没什么用的网页 收藏了一些网课&#x2F;教程, 其实没必要, 等需要了再搜索, 一样的效果 收藏了比较多的科普&#x2F;教程文章,  收藏了一些在某一时刻解决了问题的文章, 其中有一些掌握了, 仍然收藏了. 有一些没整理到笔记中. 习惯性按ctrl">
+<meta property="og:description" content="环境centos 6.5openssl 1.1.1d 安装步骤123456789101112curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gztar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gzcd &amp;#x">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-12T15:51:52.000Z">
-<meta property="article:modified_time" content="2020-05-12T16:03:25.574Z">
+<meta property="article:published_time" content="2020-05-12T16:21:46.000Z">
+<meta property="article:modified_time" content="2020-05-12T16:21:47.008Z">
 <meta property="article:author" content="Lonenso">
 <meta property="article:tag" content="Tech">
 <meta name="twitter:card" content="summary">
@@ -80,11 +80,11 @@ ga('send', 'pageview');
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-clean-bookmark" class="article article-type-post" itemscope
+        <section id="main"><article id="post-openssl-issue" class="article article-type-post" itemscope
   itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/05/12/clean-bookmark/" class="article-date">
-  <time datetime="2020-05-12T15:51:52.000Z" itemprop="datePublished">2020-05-12</time>
+    <a href="/2020/05/13/openssl-issue/" class="article-date">
+  <time datetime="2020-05-12T16:21:46.000Z" itemprop="datePublished">2020-05-13</time>
 </a>
     
   </div>
@@ -95,7 +95,7 @@ ga('send', 'pageview');
       
   
     <h1 class="article-title" itemprop="name">
-      整理360+条书签到75条
+      源码编译openssl时遇到的疑难杂症
     </h1>
   
 
@@ -103,35 +103,25 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-      <p>最近觉得自己书签数量太多, 内容太杂, 清理了一波. 觉得自己有些地方做的不好</p>
-<ol>
-<li>我有一个稍后看的文件夹, 下面的网页太多了, 都是些放了, 但没时间看的, 或者其实没什么用的网页</li>
-<li>收藏了一些网课/教程, 其实没必要, 等需要了再搜索, 一样的效果</li>
-<li>收藏了比较多的科普/教程文章, </li>
-<li>收藏了一些在某一时刻解决了问题的文章, 其中有一些掌握了, 仍然收藏了. 有一些没整理到笔记中.</li>
-<li>习惯性按ctrl + D</li>
-<li>收藏了各种各样的库/框架/官网/手册, 这类文档往往有时效性, 不如直接搜索. </li>
-<li>收藏了上一点中的中文翻译. </li>
-<li>各种各样的工具使用技巧</li>
-<li>有的内容, 不会影响我的任何决定, 可能纯粹是谈资, 有的就只是单纯的放在那里, 没动过</li>
+      <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>centos 6.5<br>openssl 1.1.1d</p>
+<h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gz</span><br><span class="line">tar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gz</span><br><span class="line">cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;openssl-1.1.1d</span><br><span class="line">.&#x2F;config --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;openssl --openssldir&#x3D;&#x2F;usr&#x2F;local&#x2F;openssl shared zlib</span><br><span class="line">make </span><br><span class="line">make test</span><br><span class="line">make install</span><br><span class="line">mv &#x2F;usr&#x2F;bin&#x2F;openssl &#x2F;usr&#x2F;bin&#x2F;openssl.bak</span><br><span class="line">mv &#x2F;usr&#x2F;include&#x2F;openssl&#x2F; &#x2F;usr&#x2F;include&#x2F;openssl.bak</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;openssl&#x2F;bin&#x2F;openssl &#x2F;usr&#x2F;bin&#x2F;openssl</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;openssl&#x2F;include&#x2F;openssl&#x2F; &#x2F;usr&#x2F;include&#x2F;openssl</span><br><span class="line">echo &quot;&#x2F;usr&#x2F;local&#x2F;openssl&#x2F;lib&quot; &gt;&gt; &#x2F;etc&#x2F;ld.so.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directory"><a href="#openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directory" class="headerlink" title="openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory"></a>openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory</h2><p>这是由于openssl库的位置不正确导致的, 创建软链接解决. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;lib64&#x2F;libssl.so.1.1 &#x2F;usr&#x2F;lib64&#x2F;libssl.so.1.1</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;lib64&#x2F;libcrypto.so.1.1 &#x2F;usr&#x2F;lib64&#x2F;libcrypto.so.1.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="Can’t-locate-Test-Harness-pm-in-INC"><a href="#Can’t-locate-Test-Harness-pm-in-INC" class="headerlink" title="Can’t locate Test/Harness.pm in @INC"></a>Can’t locate Test/Harness.pm in @INC</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install perl-CPAN</span><br><span class="line">perl -MCPAN -e shell</span><br><span class="line"># 一路yes, 到cpan[1]</span><br><span class="line">install Text::Template</span><br><span class="line"># 直到安装完成, 退出, 再make test</span><br></pre></td></tr></table></figure>
+<p><em>note: 晚上加班安装的openssl, 比较着急, 没有仔细看openssl官网</em></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="https://www.cnblogs.com/emanlee/p/6100019.html" target="_blank" rel="noopener">https://www.cnblogs.com/emanlee/p/6100019.html</a></li>
+<li><a href="https://blog.csdn.net/henter/article/details/82778484" target="_blank" rel="noopener">https://blog.csdn.net/henter/article/details/82778484</a></li>
 </ol>
-<p>归结为:</p>
-<ul>
-<li>碎片化</li>
-<li>缺少整理</li>
-<li>习惯按ctrl D 的坏习惯</li>
-<li>网上的内容大多来自同一个地方, 只是被复制/翻译/修改, 分成了很多份. 我还没辨认出来, 没学到核心, 导致看什么都很新鲜</li>
-</ul>
-<p>还有一个点就是, 不知道从什么时候开始, 我就再也没使用过onetab这个插件了, 可能那段时间用ctrl + D, 代替了这个插件.<br>导出的书签有网页被收藏的时间戳, 可以调查一下.</p>
-<p>因此, 清理了很多这类网页, 减少了我看到书签量大的恐惧, 增加重新访问书签的频率.<br>同时, 也增加了很多需要整理的内容</p>
-<p>现在书签内还有很多博主的博客链接, 应该还需要转换成订阅源.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="cka44hz6x0000vssr2ama4396" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka44hz750001vssrdahm121v" class="article-share-link">Share</a>
       
-      <a href="https://lonenso.github.io/2020/05/12/clean-bookmark/#disqus_thread" class="article-comment-link">留言</a>
+      <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tech/" rel="tag">Tech</a></li></ul>
@@ -142,19 +132,10 @@ ga('send', 'pageview');
   
 <nav id="article-nav">
   
-    <a href="/2020/05/13/openssl-issue/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          源码编译openssl时遇到的疑难杂症
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/05/12/wfh/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/05/12/clean-bookmark/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">疫情新年远程办公感受</div>
+      <div class="article-nav-title">整理360+条书签到75条</div>
     </a>
   
 </nav>
@@ -273,7 +254,7 @@ ga('send', 'pageview');
 <script>
   var disqus_shortname = 'lonenso-github-io';
   
-  var disqus_url = 'https://lonenso.github.io/2020/05/12/clean-bookmark/';
+  var disqus_url = 'https://lonenso.github.io/2020/05/13/openssl-issue/';
   
   (function(){
     var dsq = document.createElement('script');

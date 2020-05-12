@@ -77,6 +77,59 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-openssl-issue" class="article article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/13/openssl-issue/" class="article-date">
+  <time datetime="2020-05-12T16:21:46.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/13/openssl-issue/">源码编译openssl时遇到的疑难杂症</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>centos 6.5<br>openssl 1.1.1d</p>
+<h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gz</span><br><span class="line">tar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gz</span><br><span class="line">cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;openssl-1.1.1d</span><br><span class="line">.&#x2F;config --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;openssl --openssldir&#x3D;&#x2F;usr&#x2F;local&#x2F;openssl shared zlib</span><br><span class="line">make </span><br><span class="line">make test</span><br><span class="line">make install</span><br><span class="line">mv &#x2F;usr&#x2F;bin&#x2F;openssl &#x2F;usr&#x2F;bin&#x2F;openssl.bak</span><br><span class="line">mv &#x2F;usr&#x2F;include&#x2F;openssl&#x2F; &#x2F;usr&#x2F;include&#x2F;openssl.bak</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;openssl&#x2F;bin&#x2F;openssl &#x2F;usr&#x2F;bin&#x2F;openssl</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;openssl&#x2F;include&#x2F;openssl&#x2F; &#x2F;usr&#x2F;include&#x2F;openssl</span><br><span class="line">echo &quot;&#x2F;usr&#x2F;local&#x2F;openssl&#x2F;lib&quot; &gt;&gt; &#x2F;etc&#x2F;ld.so.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directory"><a href="#openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directory" class="headerlink" title="openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory"></a>openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory</h2><p>这是由于openssl库的位置不正确导致的, 创建软链接解决. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;lib64&#x2F;libssl.so.1.1 &#x2F;usr&#x2F;lib64&#x2F;libssl.so.1.1</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;lib64&#x2F;libcrypto.so.1.1 &#x2F;usr&#x2F;lib64&#x2F;libcrypto.so.1.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="Can’t-locate-Test-Harness-pm-in-INC"><a href="#Can’t-locate-Test-Harness-pm-in-INC" class="headerlink" title="Can’t locate Test/Harness.pm in @INC"></a>Can’t locate Test/Harness.pm in @INC</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install perl-CPAN</span><br><span class="line">perl -MCPAN -e shell</span><br><span class="line"># 一路yes, 到cpan[1]</span><br><span class="line">install Text::Template</span><br><span class="line"># 直到安装完成, 退出, 再make test</span><br></pre></td></tr></table></figure>
+<p><em>note: 晚上加班安装的openssl, 比较着急, 没有仔细看openssl官网</em></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="https://www.cnblogs.com/emanlee/p/6100019.html" target="_blank" rel="noopener">https://www.cnblogs.com/emanlee/p/6100019.html</a></li>
+<li><a href="https://blog.csdn.net/henter/article/details/82778484" target="_blank" rel="noopener">https://blog.csdn.net/henter/article/details/82778484</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka44hz750001vssrdahm121v" class="article-share-link">Share</a>
+      
+      <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tech/" rel="tag">Tech</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-clean-bookmark" class="article article-type-post" itemscope
   itemprop="blogPost">
   <div class="article-meta">
@@ -126,7 +179,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="cka43u8ry0000swsr6cv10ceo" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="cka44hz6x0000vssr2ama4396" class="article-share-link">Share</a>
       
       <a href="https://lonenso.github.io/2020/05/12/clean-bookmark/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -185,7 +238,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="cka43u8sa0003swsr9ffc56js" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="cka44hz7u0009vssr4d9n4anw" class="article-share-link">Share</a>
       
       <a href="https://lonenso.github.io/2020/05/12/wfh/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -244,7 +297,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka43u8s60001swsr3w27ga1v" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka44hz7k0006vssrf5zk4gtn" class="article-share-link">Share</a>
       
       <a href="https://lonenso.github.io/2020/05/12/startup/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -281,7 +334,7 @@ ga('send', 'pageview');
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Blog/" style="font-size: 10px;">Blog</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/Tech/" style="font-size: 10px;">Tech</a>
+      <a href="/tags/Blog/" style="font-size: 10px;">Blog</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/Tech/" style="font-size: 20px;">Tech</a>
     </div>
   </div>
 
@@ -301,6 +354,10 @@ ga('send', 'pageview');
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/05/13/openssl-issue/">源码编译openssl时遇到的疑难杂症</a>
+          </li>
         
           <li>
             <a href="/2020/05/12/clean-bookmark/">整理360+条书签到75条</a>
