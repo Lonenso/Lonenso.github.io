@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   
@@ -20,12 +21,12 @@ ga('send', 'pageview');
   
   <title>记Hexo + Github Pages 建博客 | Lonenso</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天心血来潮, 想要重新用github建立个博客. 官方的教程不错. 这里记录下遇到的问题 通过两仓库或两分支的操作, 把博客内容区和工作区分开, 同时跟踪和保留工作现场(备份).  这里我选择两仓库, 工作区私有, 内容区公开. 使用官方的工具, 非常方便.  搜索引擎收录问题, 谷歌搜索  1site: https:&#x2F;&#x2F;lonenso.github.io&#x2F; 这时候网站没有被收录, 搜索结果中有">
+  <meta name="description" content="今天心血来潮, 想要重新用github建立个博客. 官方的教程不错. 这里记录下遇到的问题 通过两仓库或两分支的操作, 把博客内容区和工作区分开, 同时跟踪和保留工作现场(备份).  这里我选择两仓库, 工作区私有, 内容区公开. 使用官方的工具, 非常方便.  搜索引擎收录问题, 谷歌搜索  site: https:&#x2F;&#x2F;lonenso.github.io&#x2F;这时候网站没有被收录, 搜索结果中有个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记Hexo + Github Pages 建博客">
 <meta property="og:url" content="https://lonenso.github.io/2020/05/12/startup/index.html">
 <meta property="og:site_name" content="Lonenso">
-<meta property="og:description" content="今天心血来潮, 想要重新用github建立个博客. 官方的教程不错. 这里记录下遇到的问题 通过两仓库或两分支的操作, 把博客内容区和工作区分开, 同时跟踪和保留工作现场(备份).  这里我选择两仓库, 工作区私有, 内容区公开. 使用官方的工具, 非常方便.  搜索引擎收录问题, 谷歌搜索  1site: https:&#x2F;&#x2F;lonenso.github.io&#x2F; 这时候网站没有被收录, 搜索结果中有">
+<meta property="og:description" content="今天心血来潮, 想要重新用github建立个博客. 官方的教程不错. 这里记录下遇到的问题 通过两仓库或两分支的操作, 把博客内容区和工作区分开, 同时跟踪和保留工作现场(备份).  这里我选择两仓库, 工作区私有, 内容区公开. 使用官方的工具, 非常方便.  搜索引擎收录问题, 谷歌搜索  site: https:&#x2F;&#x2F;lonenso.github.io&#x2F;这时候网站没有被收录, 搜索结果中有个">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-12T07:39:58.000Z">
 <meta property="article:modified_time" content="2020-05-12T15:25:29.719Z">
@@ -33,19 +34,18 @@ ga('send', 'pageview');
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Lonenso" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="Lonenso" type="application/atom+xml">
   
   
-    <link rel="icon" href="favicon.png">
+  <link rel="icon" href="favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/monokai-sublime.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
   
 <link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 4.2.0"></head>
-
 <body>
   <div id="container">
     <div id="wrap">
@@ -107,15 +107,15 @@ ga('send', 'pageview');
 <p>通过两仓库或两分支的操作, 把博客内容区和工作区分开, 同时跟踪和保留工作现场(备份). </p>
 <p>这里我选择两仓库, 工作区私有, 内容区公开. 使用官方的<a href="https://hexo.io/docs/github-pages.html#Private-repository" target="_blank" rel="noopener">工具</a>, 非常方便. </p>
 <p>搜索引擎收录问题, 谷歌搜索 </p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs groovy"><span class="hljs-string">site:</span> <span class="hljs-string">https:</span><span class="hljs-comment">//lonenso.github.io/</span><br></code></pre></td></tr></table></figure>
-<p>这时候网站没有被收录, 搜索结果中有个 google search console, 根据提示完成网站认证的添加.</p>
+<pre><code>site: https://lonenso.github.io/</code></pre><p>这时候网站没有被收录, 搜索结果中有个 google search console, 根据提示完成网站认证的添加.</p>
 <p>我选择的是将html文件放到站点下, 使得<a href="https://lonenso.github.io/xxxx.html">https://lonenso.github.io/xxxx.html</a> 能够访问到该文件.</p>
 <p>也就是说, 本地<a href="https://localhost:4000/xxxx.html" target="_blank" rel="noopener">https://localhost:4000/xxxx.html</a> 能够访问到该<strong>原</strong>文件, 不是被渲染后的, 配置<a href="https://hexo.io/docs/configuration.html#Directory" target="_blank" rel="noopener">skip_render</a>. </p>
 <p>接下来增加评论功能, 注册disqus, 根据指引, 最终需要手动将html代码嵌入页面中.</p>
 <p>hexo的默认主题landscape下的article.ejs, 文件末尾有一部分和disqus给的html代码很像, 把disqus给的html代码 调整放到这里, 并且把写死的disqus_shortname替换成变量</p>
-<figure class="highlight mojolicious"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mojolicious"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">%</span></span></span><span class="perl"> <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">index</span> &amp;&amp; post.comments &amp;&amp; config.disqus_shortname)&#123; </span><span class="xml"><span class="hljs-tag">%&gt;</span></span><br><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"comments"</span>&gt;</span></span><br><span class="xml">...</span><br><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span></span><br></code></pre></td></tr></table></figure>
-
-<p>在_config.yml中配置disqus_shortname即可</p>
+<pre><code>&lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname){ %&gt;
+&lt;section id=&quot;comments&quot;&gt;
+...
+&lt;/section&gt;</code></pre><p>在_config.yml中配置disqus_shortname即可</p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
 <li><a href="https://pages.github.com/" target="_blank" rel="noopener">https://pages.github.com/</a></li>
 <li><a href="http://hexo.io/" target="_blank" rel="noopener">http://hexo.io/</a></li>
@@ -125,7 +125,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka4q8fuo0000d0srays5e3bg" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka4r6mlh0004vgsr8wph0yv2" class="article-share-link">Share</a>
       
       <a href="https://lonenso.github.io/2020/05/12/startup/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -268,23 +268,23 @@ ga('send', 'pageview');
   
   var disqus_url = 'https://lonenso.github.io/2020/05/12/startup/';
   
-  (function(){
-    var dsq = document.createElement('script');
-    dsq.type = 'text/javascript';
-    dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
+    (function () {
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>
 
-
+<script>hljs.initHighlightingOnLoad();</script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  
+
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-  
+
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
@@ -302,7 +302,6 @@ ga('send', 'pageview');
 </div>
 
 <script src="/js/script.js"></script>
-
 
 
 
