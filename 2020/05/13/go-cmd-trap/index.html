@@ -19,14 +19,19 @@ ga('send', 'pageview');
 
 
   
-  <title>Tag: Life | Lonenso</title>
+  <title>Go commandContext取消不退出 | Lonenso</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Lonenso">
-<meta property="og:url" content="https://lonenso.github.io/tags/Life/index.html">
+  <meta name="description" content="环境 go1.13.1 windows&#x2F;amd64  起因是要实现功能: 执行命令, 返回命令输出, 退出码, 且有超时时间限制. 使用CommandContext.为了超时后, 能够把进程杀干净. 测试子进程再执行命令. 发现超时时间到了之后, 主进程退出, 孙进程仍存在. 参考以下文章后, 通过手动设置进程组, 手动杀死进程组完成功能.等issue close后, 继续更新 参考链接 http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go commandContext取消不退出">
+<meta property="og:url" content="https://lonenso.github.io/2020/05/13/go-cmd-trap/index.html">
 <meta property="og:site_name" content="Lonenso">
+<meta property="og:description" content="环境 go1.13.1 windows&#x2F;amd64  起因是要实现功能: 执行命令, 返回命令输出, 退出码, 且有超时时间限制. 使用CommandContext.为了超时后, 能够把进程杀干净. 测试子进程再执行命令. 发现超时时间到了之后, 主进程退出, 孙进程仍存在. 参考以下文章后, 通过手动设置进程组, 手动杀死进程组完成功能.等issue close后, 继续更新 参考链接 http">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-13T04:23:53.000Z">
+<meta property="article:modified_time" content="2020-05-13T04:26:04.917Z">
 <meta property="article:author" content="Lonenso">
+<meta property="article:tag" content="GO">
 <meta name="twitter:card" content="summary">
   
   <link rel="alternate" href="/atom.xml" title="Lonenso" type="application/atom+xml">
@@ -75,41 +80,94 @@ ga('send', 'pageview');
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/05/12/wfh/" class="archive-article-date">
-  <time datetime="2020-05-12T15:10:30.000Z" itemprop="datePublished">5月 12</time>
+        <section id="main"><article id="post-go-cmd-trap" class="article article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/13/go-cmd-trap/" class="article-date">
+  <time datetime="2020-05-13T04:23:53.000Z" itemprop="datePublished">2020-05-13</time>
 </a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/GO/">GO</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
       
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/12/wfh/">疫情新年远程办公感受</a>
+    <h1 class="article-title" itemprop="name">
+      Go commandContext取消不退出
     </h1>
   
 
     </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>go1.13.1 windows/amd64</li>
+</ul>
+<p>起因是要实现功能: 执行命令, 返回命令输出, 退出码, 且有超时时间限制. 使用<a href="https://golang.org/pkg/os/exec/#CommandContext" target="_blank" rel="noopener">CommandContext</a>.<br>为了超时后, 能够把进程杀干净. 测试子进程再执行命令. 发现超时时间到了之后, 主进程退出, 孙进程仍存在.</p>
+<p>参考以下文章后, 通过手动设置进程组, 手动杀死进程组完成功能.<br>等issue close后, 继续更新</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<li><a href="https://www.jianshu.com/p/e147d856074c" target="_blank" rel="noopener">https://www.jianshu.com/p/e147d856074c</a></li>
+<li><a href="https://github.com/golang/go/issues/23019" target="_blank" rel="noopener">https://github.com/golang/go/issues/23019</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="cka4udyxu0001b8srbc8285aq" class="article-share-link">Share</a>
+      
+      <a href="https://lonenso.github.io/2020/05/13/go-cmd-trap/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GO/" rel="tag">GO</a></li></ul>
+
+    </footer>
   </div>
+  
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/13/openssl-issue/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">源码编译Openssl时遇到的疑难杂症</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function () { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lonenso-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by
+      Disqus.</a></noscript>
+</section>
 </section>
         
           <aside id="sidebar">
@@ -210,11 +268,13 @@ ga('send', 'pageview');
 <script>
   var disqus_shortname = 'lonenso-github-io';
   
+  var disqus_url = 'https://lonenso.github.io/2020/05/13/go-cmd-trap/';
+  
     (function () {
       var dsq = document.createElement('script');
       dsq.type = 'text/javascript';
       dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
