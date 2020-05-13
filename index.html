@@ -113,7 +113,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/fix-garbled/" data-id="cka4zzt0f0002cosr4fu60ctm" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/fix-garbled/" data-id="cka50dohe0001mksrdddm7gk0" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/fix-garbled/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -171,7 +171,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="cka4zzt0r0006cosr3pnq5lf0" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="cka50dohs0005mksrf35resf9" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/linux-startup/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -225,7 +225,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="cka4zzt0n0004cosrhlsy5qjx" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="cka50dohl0003mksr9kff9u9h" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/go-cmd-trap/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -293,7 +293,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka4zzt0v0007cosrdokxaomy" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka50dohu0006mksr8ube0jwk" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -350,7 +350,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="cka4zzt0c0001cosrcnz21j81" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="cka50doh20000mksr9ql85ha1" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/clean-bookmark/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -412,7 +412,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="cka4zzt13000dcosrce4106j6" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="cka50doi3000cmksr7x5ibaiv" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/wfh/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -464,16 +464,30 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
 &lt;/section&gt;</code></pre><p>在_config.yml中配置disqus_shortname即可</p>
 <h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p><a href="https://hexo.io/docs/asset-folders" target="_blank" rel="noopener">asset-folders</a></p>
 <h2 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h2><p><a href="https://hexo.io/zh-cn/docs/tag-plugins#%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81%E5%92%8C%E6%88%AA%E6%96%AD" target="_blank" rel="noopener">read-more tag</a><br>在首页展示时, 不希望文章全文都展示出来, 可能太长.<br>在post的markdown中插入 </p>
-<pre><code>&lt;!--more--&gt;</code></pre><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+<pre><code>&lt;!--more--&gt;</code></pre><h2 id="添加rss-feed"><a href="#添加rss-feed" class="headerlink" title="添加rss feed"></a>添加rss feed</h2><p><a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="noopener">hexo-generator-feed</a><br>我在hexo下添加博客功能常犯的一个错误就是把主题的配置和博客的配置搞混</p>
+<pre><code>npm install hexo-generator-feed --save</code></pre><p>添加以下配置到博客的配置_config.yml下 </p>
+<pre><code>feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: &#39; &#39;
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:</code></pre><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
 <li><a href="https://pages.github.com/" target="_blank" rel="noopener">https://pages.github.com/</a></li>
 <li><a href="http://hexo.io/" target="_blank" rel="noopener">http://hexo.io/</a></li>
 <li><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">https://www.zhihu.com/question/21193762</a></li>
+<li><a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="noopener">https://github.com/hexojs/hexo-generator-feed</a></li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka4zzt11000acosr7ft3brnq" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka50doi00009mksr3g9n0g7i" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/startup/#disqus_thread" class="article-comment-link">留言</a>
       
