@@ -109,32 +109,18 @@ ga('send', 'pageview');
 </ul>
 <p>起因是运维要让排查一个问题</p>
 <blockquote>
-<p>rc.local 中的自启进程, limits.conf中设置了其启动用户的连接数. 为什么重启后, limits.conf无效, 登陆后, 手动重启有效. 让排查一下线上有多少机器存在连接数不匹配该配置文件的数值. </p>
+<p>rc.local 中的自启进程, limits.conf中设置了其启动用户的连接数. 为什么重启后, limits.conf无效, 登陆后, 手动重启有效. 让排查一下线上有多少机器存在连接数不匹配该配置文件的数值.<br>他认为这个事情很严重, 希望内部能有一个平台管理它. </p>
 </blockquote>
-<p>他认为这个事情很严重, 希望内部能有一个平台管理它. </p>
 <p>由于那几天我也在测试环境操作limits.conf调连接数, 我的第一反应是执行rc.local前, limits.conf加载了吗? 再来是, 为什么不在测试环境试一下, 再到线上?</p>
-<p><a href="http://cn.linux.vbird.org/linux_basic/0510osloader_1.php" target="_blank" rel="noopener">启动流程</a></p>
-<blockquote>
-<ol>
-<li>加载 BIOS 的硬件资讯与进行自我测试，并依据配置取得第一个可启动的装置； </li>
-<li>读取并运行第一个启动装置内 MBR 的 boot Loader (亦即是 grub, spfdisk 等程序)；</li>
-<li>依据 boot loader 的配置加载 Kernel ，Kernel 会开始侦测硬件与加载驱动程序；</li>
-<li>在硬件驱动成功后，Kernel 会主动呼叫 init 程序，而 init 会取得 run-level 资讯；</li>
-<li>init 运行 /etc/rc.d/rc.sysinit 文件来准备软件运行的作业环境 (如网络、时区等)；</li>
-<li>init 运行 run-level 的各个服务之启动 (script 方式)；</li>
-<li>init 运行 /etc/rc.d/rc.local 文件；</li>
-<li>init 运行终端机模拟程序 mingetty 来启动 login 程序，最后就等待使用者登陆啦；</li>
-</ol>
-</blockquote>
-<p>翻了一下<a href="http://cn.linux.vbird.org/linux_basic/0410accountmanager_5.php" target="_blank" rel="noopener">PAM模块</a>, 发现limits.conf, 是属于pam模块. </p>
-<p>而pam模块是在登录时才触发的, 所以rc.local内自启进程当然无效了. </p>
-<p>既然都编辑rc.local了, 干脆在rc.local内执行ulimit命令启动就好了. </p>
-<p>再来是这个平台管理的事情, 就反馈来看, 也就一个小事情. 倒不至于到需要平台管理的地步.<br>而且, 在设置limits.conf的前提下, 有权限的人还能临时修改连接数. 最后落到 <em>规范</em>上.</p>
-
+      
+      <p class="article-more-link">
+        <a href="/2020/05/13/linux-startup/#more">Read More</a>
+      </p>
+      
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="cka4x151i0004dwsrfpnp7n41" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="cka4x7lzw0001vgsre4kt8s39" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/linux-startup/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -188,7 +174,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="cka4x150v0000dwsreuoqe4hm" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="cka4x7lzn0000vgsr4eiehcnl" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/go-cmd-trap/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -256,7 +242,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka4x151j0005dwsr35xpeba8" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka4x7m040005vgsrgcoj336p" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -305,21 +291,15 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
 <li>各种各样的工具使用技巧/速查表</li>
 <li>有的内容, 不会影响我的任何决定, 可能纯粹是谈资, 有的就只是单纯的放在那里, 没动过</li>
 </ol>
-<p>归结为:</p>
-<ul>
-<li>碎片化</li>
-<li>缺少整理</li>
-<li>习惯按ctrl D 的坏习惯</li>
-<li>网上的内容大多来自同一个地方, 只是被复制/翻译/修改, 分成了很多份. 我还没辨认出来, 没学到核心, 导致看什么都很新鲜</li>
-</ul>
-<p><img src="/images/bookmarked_line_chart.png" alt=""></p>
-<p>因此, 清理了很多这类网页, 减少了我看到书签量大的恐惧, 增加重新访问书签的频率.<br>同时, 也增加了很多需要整理的内容</p>
-<p>现在书签内还有很多博主的博客链接, 应该还需要转换成订阅源.</p>
-
+      
+      <p class="article-more-link">
+        <a href="/2020/05/12/clean-bookmark/#more">Read More</a>
+      </p>
+      
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="cka4x151b0001dwsr5qlw0uxc" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="cka4x7m050006vgsrc6rt45cq" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/clean-bookmark/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -381,7 +361,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="cka4x1528000jdwsrezqg0h1g" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="cka4x7m08000avgsr3jbw3jn5" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/wfh/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -440,7 +420,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka4x151k0006dwsr6nxe6qdk" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka4x7m020004vgsrhg7cbubg" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/startup/#disqus_thread" class="article-comment-link">留言</a>
       
