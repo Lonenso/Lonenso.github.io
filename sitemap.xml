@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lonenso.github.io/2020/05/12/startup/</loc>
+    
+    <lastmod>2020-05-13T05:52:43.669Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://lonenso.github.io/2020/05/12/clean-bookmark/</loc>
+    
+    <lastmod>2020-05-13T05:50:05.724Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://lonenso.github.io/2020/05/13/linux-startup/</loc>
     
     <lastmod>2020-05-13T05:45:07.458Z</lastmod>
@@ -9,23 +23,9 @@
   </url>
   
   <url>
-    <loc>https://lonenso.github.io/2020/05/12/clean-bookmark/</loc>
-    
-    <lastmod>2020-05-13T05:44:36.418Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://lonenso.github.io/2020/05/13/go-cmd-trap/</loc>
     
     <lastmod>2020-05-13T04:28:02.550Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://lonenso.github.io/2020/05/12/startup/</loc>
-    
-    <lastmod>2020-05-13T03:52:27.973Z</lastmod>
     
   </url>
   
