@@ -109,8 +109,9 @@ ga('send', 'pageview');
 </ul>
 <p>起因是运维要让排查一个问题</p>
 <blockquote>
-<p>rc.local 中的自启进程, limits.conf中设置了其启动用户的连接数. 为什么重启后, limits.conf无效, 登陆后, 手动重启有效. 让排查一下线上有多少机器存在连接数不匹配该配置文件的数值.<br>他认为这个事情很严重, 希望内部能有一个平台管理它. </p>
+<p>rc.local 中的自启进程, limits.conf中设置了其启动用户的连接数. 为什么重启后, limits.conf无效, 登陆后, 手动重启有效. 让排查一下线上有多少机器存在连接数不匹配该配置文件的数值. </p>
 </blockquote>
+<p>他认为这个事情很严重, 希望内部能有一个平台管理它. </p>
 <p>由于那几天我也在测试环境操作limits.conf调连接数, 我的第一反应是执行rc.local前, limits.conf加载了吗? 再来是, 为什么不在测试环境试一下, 再到线上?</p>
       
       <p class="article-more-link">
@@ -120,7 +121,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="cka4xh1tw0003acsrcdwj05j2" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="cka4xylmn0003hcsr7zo38jeu" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/linux-startup/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -174,7 +175,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="cka4xh1ts0001acsrgie2dtp3" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="cka4xylmi0001hcsr3fqkg80g" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/go-cmd-trap/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -242,7 +243,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka4xh1ty0005acsraazk0o2e" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka4xylmp0005hcsrbbrggi6q" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -299,7 +300,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="cka4xh1ti0000acsrh18xcrc4" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="cka4xylma0000hcsr6dt6d00w" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/clean-bookmark/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -361,7 +362,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="cka4xh1u20009acsreg1c9kwc" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="cka4xylms0009hcsrazw6g3tw" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/wfh/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -412,18 +413,17 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
 ...
 &lt;/section&gt;</code></pre><p>在_config.yml中配置disqus_shortname即可</p>
 <h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p><a href="https://hexo.io/docs/asset-folders" target="_blank" rel="noopener">asset-folders</a></p>
-<h2 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h2><p>在首页展示时, 不希望文章全文都展示出来, 可能太长.<br>在post的markdown中插入 </p>
+<h2 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h2><p><a href="https://hexo.io/zh-cn/docs/tag-plugins#%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81%E5%92%8C%E6%88%AA%E6%96%AD" target="_blank" rel="noopener">read-more tag</a><br>在首页展示时, 不希望文章全文都展示出来, 可能太长.<br>在post的markdown中插入 </p>
 <pre><code>&lt;!--more--&gt;</code></pre><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
 <li><a href="https://pages.github.com/" target="_blank" rel="noopener">https://pages.github.com/</a></li>
 <li><a href="http://hexo.io/" target="_blank" rel="noopener">http://hexo.io/</a></li>
 <li><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">https://www.zhihu.com/question/21193762</a></li>
-<li><a href="https://github.com/iissnan/hexo-theme-next/issues/62" target="_blank" rel="noopener">https://github.com/iissnan/hexo-theme-next/issues/62</a></li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka4xh1u00006acsr790fhi6i" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="cka4xylmq0006hcsr25ckc2p8" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/startup/#disqus_thread" class="article-comment-link">留言</a>
       
