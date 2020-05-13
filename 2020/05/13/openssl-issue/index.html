@@ -18,17 +18,17 @@ ga('send', 'pageview');
 
 
   
-  <title>源码编译openssl时遇到的疑难杂症 | Lonenso</title>
+  <title>源码编译Openssl时遇到的疑难杂症 | Lonenso</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="环境centos 6.5openssl 1.1.1d 安装步骤123456789101112curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gztar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gzcd &amp;#x">
+  <meta name="description" content="环境 centos 6.5 openssl 1.1.1d  安装步骤123456789101112curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gztar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gzcd &#x2F;usr&#x2F;local&#x2F;src&#x2F;openssl-1.1.1d.&#x2F;config --">
 <meta property="og:type" content="article">
-<meta property="og:title" content="源码编译openssl时遇到的疑难杂症">
+<meta property="og:title" content="源码编译Openssl时遇到的疑难杂症">
 <meta property="og:url" content="https://lonenso.github.io/2020/05/13/openssl-issue/index.html">
 <meta property="og:site_name" content="Lonenso">
-<meta property="og:description" content="环境centos 6.5openssl 1.1.1d 安装步骤123456789101112curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gztar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gzcd &amp;#x">
+<meta property="og:description" content="环境 centos 6.5 openssl 1.1.1d  安装步骤123456789101112curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gztar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gzcd &#x2F;usr&#x2F;local&#x2F;src&#x2F;openssl-1.1.1d.&#x2F;config --">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-12T16:21:46.000Z">
-<meta property="article:modified_time" content="2020-05-12T16:21:47.008Z">
+<meta property="article:modified_time" content="2020-05-13T01:52:53.450Z">
 <meta property="article:author" content="Lonenso">
 <meta property="article:tag" content="Tech">
 <meta name="twitter:card" content="summary">
@@ -95,7 +95,7 @@ ga('send', 'pageview');
       
   
     <h1 class="article-title" itemprop="name">
-      源码编译openssl时遇到的疑难杂症
+      源码编译Openssl时遇到的疑难杂症
     </h1>
   
 
@@ -103,13 +103,19 @@ ga('send', 'pageview');
     
     <div class="article-entry" itemprop="articleBody">
       
-      <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>centos 6.5<br>openssl 1.1.1d</p>
-<h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gz</span><br><span class="line">tar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gz</span><br><span class="line">cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;openssl-1.1.1d</span><br><span class="line">.&#x2F;config --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;openssl --openssldir&#x3D;&#x2F;usr&#x2F;local&#x2F;openssl shared zlib</span><br><span class="line">make </span><br><span class="line">make test</span><br><span class="line">make install</span><br><span class="line">mv &#x2F;usr&#x2F;bin&#x2F;openssl &#x2F;usr&#x2F;bin&#x2F;openssl.bak</span><br><span class="line">mv &#x2F;usr&#x2F;include&#x2F;openssl&#x2F; &#x2F;usr&#x2F;include&#x2F;openssl.bak</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;openssl&#x2F;bin&#x2F;openssl &#x2F;usr&#x2F;bin&#x2F;openssl</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;openssl&#x2F;include&#x2F;openssl&#x2F; &#x2F;usr&#x2F;include&#x2F;openssl</span><br><span class="line">echo &quot;&#x2F;usr&#x2F;local&#x2F;openssl&#x2F;lib&quot; &gt;&gt; &#x2F;etc&#x2F;ld.so.conf</span><br></pre></td></tr></table></figure>
+      <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>centos 6.5</li>
+<li>openssl 1.1.1d</li>
+</ul>
+<h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -O https://www.openssl.org/<span class="hljs-built_in">source</span>/openssl-1.1.1d.tar.gz<br>tar -C /usr/<span class="hljs-built_in">local</span>/src/ -xf openssl-1.1.1d.tar.gz<br><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/src/openssl-1.1.1d<br>./config --prefix=/usr/<span class="hljs-built_in">local</span>/openssl --openssldir=/usr/<span class="hljs-built_in">local</span>/openssl shared zlib<br>make <br>make <span class="hljs-built_in">test</span><br>make install<br>mv /usr/bin/openssl /usr/bin/openssl.bak<br>mv /usr/include/openssl/ /usr/include/openssl.bak<br>ln -s /usr/<span class="hljs-built_in">local</span>/openssl/bin/openssl /usr/bin/openssl<br>ln -s /usr/<span class="hljs-built_in">local</span>/openssl/include/openssl/ /usr/include/openssl<br><span class="hljs-built_in">echo</span> <span class="hljs-string">"/usr/local/openssl/lib"</span> &gt;&gt; /etc/ld.so.conf<br></code></pre></td></tr></table></figure>
 
 <h2 id="openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directory"><a href="#openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directory" class="headerlink" title="openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory"></a>openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory</h2><p>这是由于openssl库的位置不正确导致的, 创建软链接解决. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;lib64&#x2F;libssl.so.1.1 &#x2F;usr&#x2F;lib64&#x2F;libssl.so.1.1</span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;lib64&#x2F;libcrypto.so.1.1 &#x2F;usr&#x2F;lib64&#x2F;libcrypto.so.1.1</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">ln -s /usr/local/lib64/libssl.so<span class="hljs-number">.1</span><span class="hljs-number">.1</span> /usr/lib64/libssl.so<span class="hljs-number">.1</span><span class="hljs-number">.1</span><br>ln -s /usr/local/lib64/libcrypto.so<span class="hljs-number">.1</span><span class="hljs-number">.1</span> /usr/lib64/libcrypto.so<span class="hljs-number">.1</span><span class="hljs-number">.1</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="Can’t-locate-Test-Harness-pm-in-INC"><a href="#Can’t-locate-Test-Harness-pm-in-INC" class="headerlink" title="Can’t locate Test/Harness.pm in @INC"></a>Can’t locate Test/Harness.pm in @INC</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install perl-CPAN</span><br><span class="line">perl -MCPAN -e shell</span><br><span class="line"># 一路yes, 到cpan[1]</span><br><span class="line">install Text::Template</span><br><span class="line"># 直到安装完成, 退出, 再make test</span><br></pre></td></tr></table></figure>
+<h2 id="Can’t-locate-Test-Harness-pm-in-INC"><a href="#Can’t-locate-Test-Harness-pm-in-INC" class="headerlink" title="Can’t locate Test/Harness.pm in @INC"></a>Can’t locate Test/Harness.pm in @INC</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">yum install <span class="hljs-keyword">perl</span>-CPAN<br><span class="hljs-keyword">perl</span> -MCPAN -<span class="hljs-keyword">e</span> <span class="hljs-keyword">shell</span><br></code></pre></td></tr></table></figure>
+<p>一路yes, 到cpan[1]</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">install</span> <span class="hljs-built_in">Text</span>::<span class="hljs-keyword">Template</span><br></code></pre></td></tr></table></figure>
+<p>直到安装完成, 退出, 再make test</p>
 <p><em>note: 晚上加班安装的openssl, 比较着急, 没有仔细看openssl官网</em></p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
 <li><a href="https://www.cnblogs.com/emanlee/p/6100019.html" target="_blank" rel="noopener">https://www.cnblogs.com/emanlee/p/6100019.html</a></li>
@@ -119,7 +125,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka44hz750001vssrdahm121v" class="article-share-link">Share</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka4owswu00012osr25e6hala" class="article-share-link">Share</a>
       
       <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -210,7 +216,7 @@ ga('send', 'pageview');
       <ul>
         
           <li>
-            <a href="/2020/05/13/openssl-issue/">源码编译openssl时遇到的疑难杂症</a>
+            <a href="/2020/05/13/openssl-issue/">源码编译Openssl时遇到的疑难杂症</a>
           </li>
         
           <li>
@@ -229,6 +235,8 @@ ga('send', 'pageview');
     </div>
   </div>
 
+  
+    
   
 </aside>
         
@@ -277,6 +285,17 @@ ga('send', 'pageview');
 
 
 
+<div class="bottom-btn">
+    
+    <a class="icon-gotop" href="javascript:void(0)" title="返回顶部"></a>
+    
+<script src="/js/gotop.js"></script>
+
+    <!--
+        <script src="/js/gotop.js"></script>
+        -->
+    
+</div>
 
 <script src="/js/script.js"></script>
 
