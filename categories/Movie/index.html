@@ -19,19 +19,14 @@ ga('send', 'pageview');
 
 
   
-  <title>源码编译Openssl时遇到的疑难杂症 | Lonenso</title>
+  <title>Category: Movie | Lonenso</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="环境 centos 6.5 openssl 1.1.1d  安装步骤#!&#x2F;bin&#x2F;bash curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gz tar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gz cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;openssl-1.1.1d .&#x2F;config --">
-<meta property="og:type" content="article">
-<meta property="og:title" content="源码编译Openssl时遇到的疑难杂症">
-<meta property="og:url" content="https://lonenso.github.io/2020/05/13/openssl-issue/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Lonenso">
+<meta property="og:url" content="https://lonenso.github.io/categories/Movie/index.html">
 <meta property="og:site_name" content="Lonenso">
-<meta property="og:description" content="环境 centos 6.5 openssl 1.1.1d  安装步骤#!&#x2F;bin&#x2F;bash curl -O https:&#x2F;&#x2F;www.openssl.org&#x2F;source&#x2F;openssl-1.1.1d.tar.gz tar -C &#x2F;usr&#x2F;local&#x2F;src&#x2F; -xf openssl-1.1.1d.tar.gz cd &#x2F;usr&#x2F;local&#x2F;src&#x2F;openssl-1.1.1d .&#x2F;config --">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-12T16:21:46.000Z">
-<meta property="article:modified_time" content="2020-05-13T06:02:36.425Z">
 <meta property="article:author" content="Lonenso">
-<meta property="article:tag" content="Tech">
 <meta name="twitter:card" content="summary">
   
   <link rel="alternate" href="/atom.xml" title="Lonenso" type="application/atom+xml">
@@ -80,117 +75,41 @@ ga('send', 'pageview');
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-openssl-issue" class="article article-type-post" itemscope
-  itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/13/openssl-issue/" class="article-date">
-  <time datetime="2020-05-12T16:21:46.000Z" itemprop="datePublished">2020-05-13</time>
+        <section id="main">
+  
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2020/05/14/starwars/" class="archive-article-date">
+  <time datetime="2020-05-14T15:40:54.000Z" itemprop="datePublished">5月 14</time>
 </a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <header class="article-header">
       
   
-    <h1 class="article-title" itemprop="name">
-      源码编译Openssl时遇到的疑难杂症
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/05/14/starwars/">星战观后感</a>
     </h1>
   
 
     </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>centos 6.5</li>
-<li>openssl 1.1.1d</li>
-</ul>
-<h1 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h1><pre><code class="bash">#!/bin/bash
-curl -O https://www.openssl.org/source/openssl-1.1.1d.tar.gz
-tar -C /usr/local/src/ -xf openssl-1.1.1d.tar.gz
-cd /usr/local/src/openssl-1.1.1d
-./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl shared zlib
-make 
-make test
-make install
-mv /usr/bin/openssl /usr/bin/openssl.bak
-mv /usr/include/openssl/ /usr/include/openssl.bak
-ln -s /usr/local/openssl/bin/openssl /usr/bin/openssl
-ln -s /usr/local/openssl/include/openssl/ /usr/include/openssl
-echo &quot;/usr/local/openssl/lib&quot; &gt;&gt; /etc/ld.so.conf</code></pre>
-<h2 id="openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directory"><a href="#openssl-error-while-loading-shared-libraries-libssl-so-1-1-cannot-open-shared-object-file-No-such-file-or-directory" class="headerlink" title="openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory"></a>openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory</h2><p>这是由于openssl库的位置不正确导致的, 创建软链接解决. </p>
-<pre><code>ln -s /usr/local/lib64/libssl.so.1.1 /usr/lib64/libssl.so.1.1
-ln -s /usr/local/lib64/libcrypto.so.1.1 /usr/lib64/libcrypto.so.1.1</code></pre><h2 id="Can’t-locate-Test-Harness-pm-in-INC"><a href="#Can’t-locate-Test-Harness-pm-in-INC" class="headerlink" title="Can’t locate Test/Harness.pm in @INC"></a>Can’t locate Test/Harness.pm in @INC</h2><pre><code>yum install perl-CPAN
-perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
-<pre><code>install Text::Template</code></pre><p>直到安装完成, 退出, 再make test</p>
-<p><em>note: 晚上加班安装的openssl, 比较着急, 没有仔细看openssl官网</em></p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
-<li><a href="https://www.cnblogs.com/emanlee/p/6100019.html" target="_blank" rel="noopener">https://www.cnblogs.com/emanlee/p/6100019.html</a></li>
-<li><a href="https://blog.csdn.net/henter/article/details/82778484" target="_blank" rel="noopener">https://blog.csdn.net/henter/article/details/82778484</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="cka6yakfb000jmssr7eu554mk" class="article-share-link">分享</a>
-      
-      <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tech/" rel="tag">Tech</a></li></ul>
-
-    </footer>
   </div>
-  
-  
-<nav id="article-nav">
-  
-    <a href="/2020/05/13/go-cmd-trap/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          Go commandContext取消不退出
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/05/12/clean-bookmark/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">整理360+条书签到75条</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 
-<section id="comments">
-  <div id="disqus_thread"></div>
-  <script>
-
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-    /*
-    var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function () { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script');
-      s.src = 'https://lonenso-github-io.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by
-      Disqus.</a></noscript>
-</section>
 </section>
         
           <aside id="sidebar">
@@ -306,13 +225,11 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
 <script>
   var disqus_shortname = 'lonenso-github-io';
   
-  var disqus_url = 'https://lonenso.github.io/2020/05/13/openssl-issue/';
-  
     (function () {
       var dsq = document.createElement('script');
       dsq.type = 'text/javascript';
       dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
