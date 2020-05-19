@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://lonenso.github.io/"/>
-  <updated>2020-05-15T14:51:31.978Z</updated>
+  <updated>2020-05-19T09:11:09.055Z</updated>
   <id>https://lonenso.github.io/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法导论第三版6.5习题</title>
+    <link href="https://lonenso.github.io/2020/05/19/ita-heap/"/>
+    <id>https://lonenso.github.io/2020/05/19/ita-heap/</id>
+    <published>2020-05-19T09:08:52.000Z</published>
+    <updated>2020-05-19T09:11:09.055Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><table><thead><tr><th>操作</th><th>时间复杂度</th></tr></thead><tbody><tr><td>MAX-HEAPIFY</td><td>O(lgn)</td></tr><tr><td>BUILD-MAX-HEAP</td><td>O(n)</td></tr><tr><td>HEAPSORT</td><td>O(nlgn)</td></tr><tr><td>MAX-HEAP-INSERT</td><td>O(lgn)</td></tr><tr><td>HEAP-EXTRACT-MAX</td><td>O(lgn)</td></tr><tr><td>HEAP-INCREASE-KEY</td><td>O(lgn)</td></tr><tr><td>HEAP-MAXIMUM</td><td>O(1)</td></tr><tr><td>HEAP-DELETE</td><td>O(lgn)</td></tr></tbody></table><a id="more"></a><p>Note:<br>建堆: O(n) 次调用堆化, 粗略O(nlgn), 但能得到更紧确的时间复杂度O(n)<br>堆排序: 先建堆, 然后弹出堆顶元素, 替换堆末尾的元素到顶部, 堆化.<br>插入元素: 插入无限小元素到末尾, 然后调用HEAP-INCREASE-KEY. 完成插入<br>提取最大值: 弹出堆顶, 替换成末尾元素, 然后下沉<br>增加关键字的值: 值增加后, 节点上浮.</p><h2 id="6-5-3"><a href="#6-5-3" class="headerlink" title="6.5-3"></a>6.5-3</h2><p><a href="https://github.com/Lonenso/algo/tree/master/ch06" target="_blank" rel="noopener">minHeap</a></p><h2 id="6-5-4"><a href="#6-5-4" class="headerlink" title="6.5-4"></a>6.5-4</h2><p>MAX-HEAP-INCREASE(A, i, key) 中要求key的值比A[i]的大</p><h2 id="6-5-6"><a href="#6-5-6" class="headerlink" title="6.5-6"></a>6.5-6</h2><p>先移动和变换, 找到插入的位置再赋值key</p><pre><code>HEAP-INCREASE-KEY(A, i, key)if key &lt; A[i]    error &quot;new key is smaller than current key&quot;while i &gt; 1 and A[PARENT(i)] &lt; key    A[i] = A[parent(i)]A[i] = key</code></pre><h2 id="6-5-7"><a href="#6-5-7" class="headerlink" title="6.5-7"></a>6.5-7</h2><p>用插入的顺序的值构建最小堆, 另存储元素实际的值<br>优先队列(最小堆)实现先进先出队列: 先进先出, 插入的顺序是增加的<br>优先队列(最小堆)实现栈: 相反, 插入的顺序是减小的.</p><h2 id="6-5-8"><a href="#6-5-8" class="headerlink" title="6.5-8"></a>6.5-8</h2><p>(最大堆)<br>都是把要删除的, 要提取的元素和末尾元素替换, 然后重新堆化(Heapify).<br>但是为了保证删除后, 还能维持堆的性质. (与末尾元素相比). 当删除的元素较大, 得上浮. 当删除的元素较小, 得下沉</p><p>操作MAX-HEAPIFY 是 O(lgn), HEAP-INCREASE-KEY 也是O(lgn). </p><pre><code>MAX-HEAP-DELETE(A, i)if A[i] &lt; A[A.heap-size]    A[i] = A[A.heap-size]    MAX-HEAPIFY(A, i)else    HEAP-INCREASE-KEY(A, i, A[A.heap-size])A.heap-size = A.heap-size - 1</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;表&quot;&gt;&lt;a href=&quot;#表&quot; class=&quot;headerlink&quot; title=&quot;表&quot;&gt;&lt;/a&gt;表&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;操作&lt;/th&gt;
+&lt;th&gt;时间复杂度&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;MAX-HEAPIFY&lt;/td&gt;
+&lt;td&gt;O(lgn)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;BUILD-MAX-HEAP&lt;/td&gt;
+&lt;td&gt;O(n)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HEAPSORT&lt;/td&gt;
+&lt;td&gt;O(nlgn)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;MAX-HEAP-INSERT&lt;/td&gt;
+&lt;td&gt;O(lgn)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HEAP-EXTRACT-MAX&lt;/td&gt;
+&lt;td&gt;O(lgn)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HEAP-INCREASE-KEY&lt;/td&gt;
+&lt;td&gt;O(lgn)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HEAP-MAXIMUM&lt;/td&gt;
+&lt;td&gt;O(1)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HEAP-DELETE&lt;/td&gt;
+&lt;td&gt;O(lgn)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="算法导论" scheme="https://lonenso.github.io/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>星战观后感</title>

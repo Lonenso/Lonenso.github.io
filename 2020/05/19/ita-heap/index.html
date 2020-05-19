@@ -19,14 +19,19 @@ ga('send', 'pageview');
 
 
   
-  <title>Category: Movie | Lonenso</title>
+  <title>算法导论第三版6.5习题 | Lonenso</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Lonenso">
-<meta property="og:url" content="https://lonenso.github.io/categories/Movie/index.html">
+  <meta name="description" content="表   操作 时间复杂度    MAX-HEAPIFY O(lgn)   BUILD-MAX-HEAP O(n)   HEAPSORT O(nlgn)   MAX-HEAP-INSERT O(lgn)   HEAP-EXTRACT-MAX O(lgn)   HEAP-INCREASE-KEY O(lgn)   HEAP-MAXIMUM O(1)   HEAP-DELETE O(lgn)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法导论第三版6.5习题">
+<meta property="og:url" content="https://lonenso.github.io/2020/05/19/ita-heap/index.html">
 <meta property="og:site_name" content="Lonenso">
+<meta property="og:description" content="表   操作 时间复杂度    MAX-HEAPIFY O(lgn)   BUILD-MAX-HEAP O(n)   HEAPSORT O(nlgn)   MAX-HEAP-INSERT O(lgn)   HEAP-EXTRACT-MAX O(lgn)   HEAP-INCREASE-KEY O(lgn)   HEAP-MAXIMUM O(1)   HEAP-DELETE O(lgn)">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-19T09:08:52.000Z">
+<meta property="article:modified_time" content="2020-05-19T09:11:09.055Z">
 <meta property="article:author" content="Lonenso">
+<meta property="article:tag" content="算法导论">
 <meta name="twitter:card" content="summary">
   
   <link rel="alternate" href="/atom.xml" title="Lonenso" type="application/atom+xml">
@@ -75,41 +80,141 @@ ga('send', 'pageview');
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/05/14/starwars/" class="archive-article-date">
-  <time datetime="2020-05-14T15:40:54.000Z" itemprop="datePublished">5月 14</time>
+        <section id="main"><article id="post-ita-heap" class="article article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/19/ita-heap/" class="article-date">
+  <time datetime="2020-05-19T09:08:52.000Z" itemprop="datePublished">2020-05-19</time>
 </a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
       
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/14/starwars/">星战观后感</a>
+    <h1 class="article-title" itemprop="name">
+      算法导论第三版6.5习题
     </h1>
   
 
     </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="表"><a href="#表" class="headerlink" title="表"></a>表</h2><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MAX-HEAPIFY</td>
+<td>O(lgn)</td>
+</tr>
+<tr>
+<td>BUILD-MAX-HEAP</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>HEAPSORT</td>
+<td>O(nlgn)</td>
+</tr>
+<tr>
+<td>MAX-HEAP-INSERT</td>
+<td>O(lgn)</td>
+</tr>
+<tr>
+<td>HEAP-EXTRACT-MAX</td>
+<td>O(lgn)</td>
+</tr>
+<tr>
+<td>HEAP-INCREASE-KEY</td>
+<td>O(lgn)</td>
+</tr>
+<tr>
+<td>HEAP-MAXIMUM</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>HEAP-DELETE</td>
+<td>O(lgn)</td>
+</tr>
+</tbody></table>
+<a id="more"></a>
+
+<p>Note:<br>建堆: O(n) 次调用堆化, 粗略O(nlgn), 但能得到更紧确的时间复杂度O(n)<br>堆排序: 先建堆, 然后弹出堆顶元素, 替换堆末尾的元素到顶部, 堆化.<br>插入元素: 插入无限小元素到末尾, 然后调用HEAP-INCREASE-KEY. 完成插入<br>提取最大值: 弹出堆顶, 替换成末尾元素, 然后下沉<br>增加关键字的值: 值增加后, 节点上浮.</p>
+<h2 id="6-5-3"><a href="#6-5-3" class="headerlink" title="6.5-3"></a>6.5-3</h2><p><a href="https://github.com/Lonenso/algo/tree/master/ch06" target="_blank" rel="noopener">minHeap</a></p>
+<h2 id="6-5-4"><a href="#6-5-4" class="headerlink" title="6.5-4"></a>6.5-4</h2><p>MAX-HEAP-INCREASE(A, i, key) 中要求key的值比A[i]的大</p>
+<h2 id="6-5-6"><a href="#6-5-6" class="headerlink" title="6.5-6"></a>6.5-6</h2><p>先移动和变换, 找到插入的位置再赋值key</p>
+<pre><code>HEAP-INCREASE-KEY(A, i, key)
+if key &lt; A[i]
+    error &quot;new key is smaller than current key&quot;
+while i &gt; 1 and A[PARENT(i)] &lt; key
+    A[i] = A[parent(i)]
+A[i] = key</code></pre><h2 id="6-5-7"><a href="#6-5-7" class="headerlink" title="6.5-7"></a>6.5-7</h2><p>用插入的顺序的值构建最小堆, 另存储元素实际的值<br>优先队列(最小堆)实现先进先出队列: 先进先出, 插入的顺序是增加的<br>优先队列(最小堆)实现栈: 相反, 插入的顺序是减小的.</p>
+<h2 id="6-5-8"><a href="#6-5-8" class="headerlink" title="6.5-8"></a>6.5-8</h2><p>(最大堆)<br>都是把要删除的, 要提取的元素和末尾元素替换, 然后重新堆化(Heapify).<br>但是为了保证删除后, 还能维持堆的性质. (与末尾元素相比). 当删除的元素较大, 得上浮. 当删除的元素较小, 得下沉</p>
+<p>操作MAX-HEAPIFY 是 O(lgn), HEAP-INCREASE-KEY 也是O(lgn). </p>
+<pre><code>MAX-HEAP-DELETE(A, i)
+if A[i] &lt; A[A.heap-size]
+    A[i] = A[A.heap-size]
+    MAX-HEAPIFY(A, i)
+else
+    HEAP-INCREASE-KEY(A, i, A[A.heap-size])
+A.heap-size = A.heap-size - 1</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lonenso.github.io/2020/05/19/ita-heap/" data-id="ckadp72wa0006bgsr620u7a0x" class="article-share-link">分享</a>
+      
+      <a href="https://lonenso.github.io/2020/05/19/ita-heap/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/" rel="tag">算法导论</a></li></ul>
+
+    </footer>
   </div>
+  
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/14/starwars/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">星战观后感</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function () { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lonenso-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by
+      Disqus.</a></noscript>
+</section>
 </section>
         
           <aside id="sidebar">
@@ -225,11 +330,13 @@ ga('send', 'pageview');
 <script>
   var disqus_shortname = 'lonenso-github-io';
   
+  var disqus_url = 'https://lonenso.github.io/2020/05/19/ita-heap/';
+  
     (function () {
       var dsq = document.createElement('script');
       dsq.type = 'text/javascript';
       dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
