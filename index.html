@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
 <!-- Google Analytics -->
 <script type="text/javascript">
@@ -40,9 +40,9 @@ ga('send', 'pageview');
   
 <link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 <body>
-  <div id="container">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
     <div id="wrap">
       <header id="header">
   <div id="banner"></div>
@@ -76,6 +76,71 @@ ga('send', 'pageview');
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-leetcode-1453" class="article article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/20/leetcode-1453/" class="article-date">
+  <time datetime="2020-05-20T09:15:03.000Z" itemprop="datePublished">2020-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/20/leetcode-1453/">1453. Maximum Number of Darts Inside of a Circular Dartboard</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <p>leetcode某周<a href="https://leetcode.com/problems/maximum-number-of-darts-inside-of-a-circular-dartboard/" target="_blank" rel="noopener">周赛题</a>. 感觉很有思路, 但一直WA. 后来搞明白要考虑斜率. </p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>一开始想的是三角形的外接圆. 打算用三点求圆. 发现好像不好和半径进行关联. 后来想想半径+两点就能画圆了. 于是步骤如下</p>
+<ol>
+<li>两两坐标画圆, 根据两点坐标+圆的半径画圆</li>
+<li>判断其他点是否在圆内(比较两点距离和半径的关系)</li>
+<li>取最大值</li>
+</ol>
+<img src="/2020/05/20/leetcode-1453/leetcode-1453-sample.jpg" class="">
+
+<h2 id="画圆"><a href="#画圆" class="headerlink" title="画圆"></a>画圆</h2><p>假设两点为$A(x_1, y_1), B(x_2, y_2)$. 过中点D做垂直平分线. 如果半径r小于AD, 则不存在圆. 终止.<br>假设存在圆C.<br>过点B, 做x轴的平行线, 过点A做y轴的平行线. 两条线交点M. 过点D做y轴的平行线, 与直线BM交点N.<br>过圆心点C做垂直使得CO垂直DN. </p>
+<p>此时$∠MAB = ∠NDB = ∠DCO = θ$</p>
+<p>$cosθ = |y_1-y_2|/AB$<br>$sinθ = |x_1-x_2|/AB$</p>
+<p><strong>根据AB的斜率不同, 圆心的坐标不同</strong></p>
+<ul>
+<li><p>当AB斜率小于0时<br>$x_C$ = $x_D ± CD * cosθ$<br>$y_C$ = $y_D ± CD * sinθ$</p>
+</li>
+<li><p>当AB斜率大于0时<br>$x_C$ = $x_D ∓ CD * cosθ$<br>$y_C$ = $y_D ∓ CD * sinθ$</p>
+</li>
+</ul>
+<p>其实不需要考虑两边, 一直选择某一边即可.<br>但看了下别人的写法, 好像是相似三角形. 别人好像没考虑斜率, 但是代码看不懂..</p>
+      
+      <p class="article-more-link">
+        <a href="/2020/05/20/leetcode-1453/#more">Read More</a>
+      </p>
+      
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lonenso.github.io/2020/05/20/leetcode-1453/" data-id="ckaf6bm77000e88srgya855ny" class="article-share-link">分享</a>
+      
+      <a href="https://lonenso.github.io/2020/05/20/leetcode-1453/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-ita-heap" class="article article-type-post" itemscope
   itemprop="blogPost">
@@ -148,7 +213,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/19/ita-heap/" data-id="ckadp72wa0006bgsr620u7a0x" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/19/ita-heap/" data-id="ckaf6bm6z000688sr3hv01cq6" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/19/ita-heap/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -198,7 +263,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/14/starwars/" data-id="ckadp72wy000gbgsrgrcl9wwf" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/14/starwars/" data-id="ckaf6bm79000g88sr3nvcgm8m" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/14/starwars/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -248,7 +313,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/fix-garbled/" data-id="ckadp72vx0003bgsr7o271c12" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/fix-garbled/" data-id="ckaf6bm6u000388srg1vu0qxa" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/fix-garbled/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -306,7 +371,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="ckadp72wd0009bgsr6fpvaer3" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="ckaf6bm73000988srcgo166fg" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/linux-startup/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -360,7 +425,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="ckadp72w30004bgsrdl36fl4w" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="ckaf6bm6w000488srglcr4w6b" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/go-cmd-trap/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -428,7 +493,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="ckadp72wh000abgsr7t4w67lc" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="ckaf6bm75000a88sr1g25gc56" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -485,7 +550,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="ckadp72u50001bgsrhtiebzb9" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="ckaf6bm6q000188sr9s1x374w" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/clean-bookmark/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -547,7 +612,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="ckadp72x8000kbgsrhhp5c62h" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="ckaf6bm7d000o88sr5hml6j9d" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/wfh/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -612,7 +677,19 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
   order_by: -date
   icon: icon.png
   autodiscovery: true
-  template:</code></pre><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
+  template:</code></pre><h2 id="添加公式支持"><a href="#添加公式支持" class="headerlink" title="添加公式支持"></a>添加公式支持</h2><pre><code>npm install hexo-math --save</code></pre><p>开箱可用, 不需要再加配置了</p>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO?"></a>TODO?</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> 评论集成</li>
+<li><input disabled="" type="checkbox"> 图片添加</li>
+<li><input checked="" disabled="" type="checkbox"> 阅读全文</li>
+<li><input checked="" disabled="" type="checkbox"> 回到顶部</li>
+<li><input checked="" disabled="" type="checkbox"> RSS Feed</li>
+<li><input checked="" disabled="" type="checkbox"> 公式支持</li>
+<li><input disabled="" type="checkbox"> 代码折叠</li>
+<li><input disabled="" type="checkbox"> 代码复制</li>
+<li><input disabled="" type="checkbox"> TOC</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
 <li><a href="https://pages.github.com/" target="_blank" rel="noopener">https://pages.github.com/</a></li>
 <li><a href="http://hexo.io/" target="_blank" rel="noopener">http://hexo.io/</a></li>
 <li><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">https://www.zhihu.com/question/21193762</a></li>
@@ -622,7 +699,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="ckadp72wt000ebgsrfktf6rwe" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="ckaf6bm7b000k88sr6ztc9vka" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/startup/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -656,7 +733,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/" rel="tag">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/" rel="tag">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tech/" rel="tag">Tech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/" rel="tag">算法导论</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO/" rel="tag">GO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/" rel="tag">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tech/" rel="tag">Tech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/" rel="tag">算法导论</a></li></ul>
     </div>
   </div>
 
@@ -666,7 +743,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Blog/" style="font-size: 10px;">Blog</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Life/" style="font-size: 15px;">Life</a> <a href="/tags/Tech/" style="font-size: 20px;">Tech</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/" style="font-size: 10px;">算法导论</a>
+      <a href="/tags/Blog/" style="font-size: 10px;">Blog</a> <a href="/tags/GO/" style="font-size: 10px;">GO</a> <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/Life/" style="font-size: 15px;">Life</a> <a href="/tags/Tech/" style="font-size: 20px;">Tech</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/" style="font-size: 10px;">算法导论</a>
     </div>
   </div>
 
@@ -688,6 +765,10 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       <ul>
         
           <li>
+            <a href="/2020/05/20/leetcode-1453/">1453. Maximum Number of Darts Inside of a Circular Dartboard</a>
+          </li>
+        
+          <li>
             <a href="/2020/05/19/ita-heap/">算法导论第三版6.5习题</a>
           </li>
         
@@ -701,10 +782,6 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
         
           <li>
             <a href="/2020/05/13/linux-startup/">limits.conf和rc.local加载顺序</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/13/go-cmd-trap/">Go commandContext取消不退出</a>
           </li>
         
       </ul>
@@ -790,6 +867,6 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
 
 
 
-  </div>
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
