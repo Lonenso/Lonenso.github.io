@@ -81,6 +81,130 @@ ga('send', 'pageview');
       <div class="outer">
         <section id="main">
   
+    <article id="post-mysql-crashcourse" class="article article-type-post" itemscope
+  itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/17/mysql-crashcourse/" class="article-date">
+  <time datetime="2020-07-17T04:47:59.000Z" itemprop="datePublished">2020-07-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/17/mysql-crashcourse/">MySQL必知必会笔记</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <p>起因是面试的时候被问到LEFT JOIN, RIGHT JOIN. 之前在工作中没用过, 也不是很了解.<br>只感觉是集合的交并差运算.</p>
+<p>买了&lt;&lt;MySQL必知必会&gt;&gt;过来看. 过一遍后记录一下. </p>
+<p>仅记录以前不懂的, 不知道的, 先后顺序同原书籍, 并重新思考在之前的工作中可以怎么样更好的完成任务, 思考技术出现的原因, 不专注于技术本身.</p>
+<h1 id="汇总"><a href="#汇总" class="headerlink" title="汇总"></a>汇总</h1><ul>
+<li>Limit 语法, Limit 3, 4的语义并不清晰, 直接. 由于这个原因, MySQL 5 支持Limit的另一种语法, LIMIT 4 OFFSET 3</li>
+<li>除了”%”以外, 还有一个通配符”_”, 用来匹配单个字符.</li>
+<li>经常需要汇总数据而不需要把所有记录都检索出来, 为此提供专门的函数. 返回数据再进行处理是对时间/处理资源和带宽的浪费.</li>
+<li>表的联结, MySQL无OUTER JOIN</li>
+<li>在多次对同一张表进行子查询时, 可以通过别名进行自联结. 在有需要的情况下, 比较两种语句的性能.</li>
+<li>组合查询, 将同样列不同语句的查询结果拼接在一起. </li>
+<li>全文本搜索, MyISAM引擎支持, 性能好, 但不支持事务. InnoDB支持事务但不支持全文本搜索. 外键跨引擎可能不行. </li>
+<li>启用全文本搜索支持, FULLTEXT索引, 通过Match指定列, Against匹配搜索表达式, 同时提到一个技巧导入数据时不启用索引而是导入完成后再建立索引. 来减少花费的时间. </li>
+<li>提到全文本搜索有两种扩展模式, 一是查询扩展, 给我的感觉类似grep -C, 是以匹配行中包含的其他词来扩展查询. 二是布尔查询.</li>
+<li>索引全文本数据时, 短词(长度短, 可配置), 停用词, 非用词(出现在50%的行中, 匹配返回没有意义)会被忽略. </li>
+<li>提到通常数据库检索比存储数据重要, 根据场景, 可以调低动作的优先级. INSERT LOW_PRIORITY INTO</li>
+<li>INSERT SELECT 不关心列名, 关心列的顺序. </li>
+<li>视图是一组SQL的集合(Dashboard), 重用SQL语句, 简化操作. </li>
+<li>存储过程, 批处理, 支持传参, 返回结果. 简化操作, 提供强大而又灵活的功能. (提到存储过程比使用单独的SQL语句性能更好)</li>
+<li>游标, 检索出数据后会需要对数据进行浏览, 跳转. </li>
+<li>事务处理, 提到一个之前不知道的savepoint, 指的是100个操作, 第80个操作错了, 可能没必要全部回滚, 而只需回滚到某一个操作即可. </li>
+<li>字符集(character set), 编码, 校对(collation), collation用来规定字符如何比较. 现在才知道 utf8_general_ci(case intensive), cs =&gt; case sensitive. </li>
+<li>备份数据, 提到为了保证所有数据被写到磁盘(包括索引数据), 可能需要在进行备份前使用FLUSH TABLES(在想现在还需要吗? 会不会集成到mysqldump里面去了)</li>
+</ul>
+<h1 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h1><p>可能还得整一个cheatsheet</p>
+<pre><code>如何获取当前MySQL的保留字(查看官网当前版本手册)
+如何区分是view还是普通表?
+show full table;
+如何列出存储过程?(之前没用过存储过程, 虽然现在也不打算用)
+show procedure status;
+如何列出表的索引?(之前只会在gui下查看, 部署完了就没看过)
+show indexes from products;</code></pre><p>之前工作的时候大概有这么一个查询语句, 两层嵌套子查询. 涉及到两张表(A, B), 其中B是关系表, 表明A表中记录的父子关系.<br>语句做的事情是: 给定父节点, 得到属于该节点儿子的节点数量, 并可能加入一些其他的条件如儿子节点的上一次心跳时间等. </p>
+<pre><code>&gt; use test;
+&gt; show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| a              |
+| b              |
++----------------+
+2 rows in set (0.02 sec)
+mysql&gt; select * from a;
++----+------+--------+
+| id | name | role   |
++----+------+--------+
+|  1 | aaa  | parent |
+|  2 | bbb  | parent |
+|  3 | ccc  | child  |
+|  4 | ddd  | child  |
+|  5 | eee  | child  |
++----+------+--------+
+5 rows in set (0.03 sec)
+
+mysql&gt; select * from b;
++----+-----------+----------+
+| id | parent_id | child_id |
++----+-----------+----------+
+|  1 |         1 |        3 |
+|  2 |         1 |        4 |
+|  3 |         2 |        5 |
++----+-----------+----------+
+3 rows in set (0.04 sec)
+
+即aaa是ccc和ddd的父节点, bbb是eee的父节点</code></pre><p>原语句:</p>
+<pre><code>select count(1)
+from a
+where id IN (
+    select child_id
+    from b
+    where parent_id = (
+        select id
+        from a
+        where name = &quot;aaa&quot;
+          and role = &quot;parent&quot;)
+);</code></pre><p>现语句:</p>
+<pre><code>select count(1)
+from a,
+     a as a2,
+     b
+where a2.name = &quot;aaa&quot;
+  and a2.role = &quot;parent&quot;
+  and a.id = b.child_id
+  and a2.id = b.parent_id;</code></pre><p>目前来看我认为自联结比原来简洁, 但实际性能两者还需要比较一下.</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>之前复制粘贴SQL语句查询的时候, 觉得枯燥和繁琐. 应该提取出视图和存储过程先过渡一下的. 那时候想的是整一个统计部署的页面, 也没时间就耽误了.<br>这下了解论坛上大家提到的存储过程很长, 业务逻辑在SQL层是什么情况了.<br>之前不知道数据库有游标, 只是之前java的作业里直接使用的MySQL的连接件操作游标, pymysql也操作过游标.<br>之后&lt;&lt;高性能MySQL优化&gt;&gt;再说</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lonenso.github.io/2020/07/17/mysql-crashcourse/" data-id="ckcpr23ac000tzwsr264d2moa" class="article-share-link">分享</a>
+      
+      <a href="https://lonenso.github.io/2020/07/17/mysql-crashcourse/#disqus_thread" class="article-comment-link">留言</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tech/" rel="tag">Tech</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-leetcode-1453" class="article article-type-post" itemscope
   itemprop="blogPost">
   <div class="article-meta">
@@ -132,7 +256,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/20/leetcode-1453/" data-id="ckaqomyze000i3osr38010ya6" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/20/leetcode-1453/" data-id="ckcpr23a8000nzwsrf6dod9qs" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/20/leetcode-1453/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -217,7 +341,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/19/ita-heap/" data-id="ckaqomyzc000g3osr2v2e8vrh" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/19/ita-heap/" data-id="ckcpr23a4000lzwsrdapydhmk" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/19/ita-heap/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -267,7 +391,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/14/starwars/" data-id="ckaqomyzs000t3osr6mghdo7f" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/14/starwars/" data-id="ckcpr23as0012zwsr1vtzdk17" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/14/starwars/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -317,7 +441,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/fix-garbled/" data-id="ckaqomyz5000b3osr2ipbbnie" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/fix-garbled/" data-id="ckcpr239v000gzwsras3e5h93" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/fix-garbled/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -375,7 +499,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="ckaqomyzj000l3osr2651apxx" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="ckcpr23a9000pzwsrffzdbwli" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/linux-startup/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -429,7 +553,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="ckaqomyz9000d3osr3v1thju5" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="ckcpr23a0000izwsrfhrehz2x" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/go-cmd-trap/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -497,7 +621,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="ckaqomyzl000o3osr1vlpe07r" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="ckcpr23ah000vzwsr7bnv96yo" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -554,7 +678,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="ckaqomyz300093osra9rga24r" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="ckcpr239p000fzwsr4cv4c3ts" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/clean-bookmark/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -616,7 +740,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="ckaqomyzu000w3osr8odketez" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="ckcpr23az0015zwsr3jdt2ddo" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/wfh/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -630,143 +754,12 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
 
 
   
-    <article id="post-startup" class="article article-type-post" itemscope
-  itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/05/12/startup/" class="article-date">
-  <time datetime="2020-05-12T07:39:58.000Z" itemprop="datePublished">2020-05-12</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/05/12/startup/">记Hexo + Github Pages 建博客</a>
-    </h1>
-  
-
-    </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      <p>今天心血来潮, 想要重新用github建立个博客. 官方的<a href="https://pages.github.com/" target="_blank" rel="noopener">教程</a>不错. 这里记录下遇到的问题</p>
-<h2 id="博客内容和工作区结构组织"><a href="#博客内容和工作区结构组织" class="headerlink" title="博客内容和工作区结构组织"></a>博客内容和工作区结构组织</h2><p>通过两仓库或两分支的操作, 把博客内容区和工作区分开, 同时跟踪和保留工作现场(备份). </p>
-<p>这里我选择两仓库, 工作区私有, 内容区公开. 使用官方的<a href="https://hexo.io/docs/github-pages.html#Private-repository" target="_blank" rel="noopener">工具</a>, 非常方便. </p>
-<h2 id="搜索引擎收录"><a href="#搜索引擎收录" class="headerlink" title="搜索引擎收录"></a>搜索引擎收录</h2><p>谷歌搜索 </p>
-<pre><code>site: https://lonenso.github.io/</code></pre><p><img src="/images/google_search_console.png" alt=""><br>这时候网站没有被收录, 搜索结果中有个 google search console, 根据提示完成网站认证的添加.</p>
-<p>我选择的是将html文件放到站点下, 使得<a href="https://lonenso.github.io/xxxx.html">https://lonenso.github.io/xxxx.html</a> 能够访问到该文件.</p>
-<p>也就是说, 本地<a href="https://localhost:4000/xxxx.html" target="_blank" rel="noopener">https://localhost:4000/xxxx.html</a> 能够访问到该<strong>原</strong>文件, 不是被渲染后的, 配置<a href="https://hexo.io/docs/configuration.html#Directory" target="_blank" rel="noopener">skip_render</a>. </p>
-<h2 id="disqus-评论集成"><a href="#disqus-评论集成" class="headerlink" title="disqus 评论集成"></a>disqus 评论集成</h2><p>接下来增加评论功能, 注册disqus, 根据指引, 最终需要手动将html代码嵌入页面中.</p>
-<p>hexo的默认主题landscape下的article.ejs, 文件末尾有一部分和disqus给的html代码很像, 把disqus给的html代码 调整放到这里, 并且把写死的disqus_shortname替换成变量</p>
-<pre><code>&lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname){ %&gt;
-&lt;section id=&quot;comments&quot;&gt;
-...
-&lt;/section&gt;</code></pre><p>在_config.yml中配置disqus_shortname即可</p>
-<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p><a href="https://hexo.io/docs/asset-folders" target="_blank" rel="noopener">asset-folders</a></p>
-<h2 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h2><p><a href="https://hexo.io/zh-cn/docs/tag-plugins#%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81%E5%92%8C%E6%88%AA%E6%96%AD" target="_blank" rel="noopener">read-more tag</a><br>在首页展示时, 不希望文章全文都展示出来, 可能太长.<br>在post的markdown中插入 </p>
-<pre><code>&lt;!--more--&gt;</code></pre><h2 id="添加rss-feed"><a href="#添加rss-feed" class="headerlink" title="添加rss feed"></a>添加rss feed</h2><p><a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="noopener">hexo-generator-feed</a><br>我在hexo下添加博客功能常犯的一个错误就是把主题的配置和博客的配置搞混</p>
-<pre><code>npm install hexo-generator-feed --save</code></pre><p>添加以下配置到博客的配置_config.yml下 </p>
-<pre><code>feed:
-  type: atom
-  path: atom.xml
-  limit: 20
-  hub:
-  content:
-  content_limit: 140
-  content_limit_delim: &#39; &#39;
-  order_by: -date
-  icon: icon.png
-  autodiscovery: true
-  template:</code></pre><h2 id="添加公式支持"><a href="#添加公式支持" class="headerlink" title="添加公式支持"></a>添加公式支持</h2><pre><code class="cmd">npm install hexo-math --save</code></pre>
-<p><del>开箱可用, 不需要再加配置了</del><br>hexo-math 有点问题, 具体是自己遇到的<a href="https://github.com/hexojs/hexo-math/issues/120" target="_blank" rel="noopener">#120</a><br>后来我理了下逻辑</p>
-<pre><code class="cmd">mkdir newfolder 
-cd newfolder &amp;&amp; hexo init
-npm install hexo-math --save
-hexo new post a
-echo $a=b+c$ &gt;&gt; source\_posts\a.md
-hexo clean &amp;&amp; hexo s</code></pre>
-<p>这时打开浏览器, 看不到效果.<br>于是我根据<a href="https://github.com/hexojs/hexo-math/issues/26#issuecomment-241872127" target="_blank" rel="noopener">#26</a></p>
-<pre><code class="cmd">npm install hexo-renderer-mathjax --save
-npm list hexo-renderer-mathjax</code></pre>
-<p>会发现此时还没有<code>hexo-renderer-mathjax</code>这个库. 大概原因是postinstall触发安装了hexo-inject.<br>再执行一次</p>
-<pre><code class="cmd">npm install hexo-renderer-mathjax --save
-hexo clean &amp;&amp; hexo s</code></pre>
-<p>这时候, 打开浏览器就有了. 至于为什么本地看是https, 发布后是http就不清楚了.</p>
-<p>既然在<a href="https://github.com/hexojs/hexo-math/issues/26#issuecomment-241872127" target="_blank" rel="noopener">#26</a>中有那么多人遇到了使用上的问题, 不如不用这个插件了.</p>
-<p>改为手动修改html代码, 选择页面中加载mathJax, 在<code>after-footer.ejs</code>中添加代码</p>
-<pre><code class="html">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ [&quot;$&quot;,&quot;$&quot;], [&quot;\\(&quot;,&quot;\\)&quot;] ],
-          skipTags: [&#39;script&#39;, &#39;noscript&#39;, &#39;style&#39;, &#39;textarea&#39;, &#39;pre&#39;, &#39;code&#39;],
-          processEscapes: true
-      }
-  });
-  MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax();
-      for (var i = 0; i &lt; all.length; ++i)
-          all[i].SourceElement().parentNode.className += &#39; has-jax&#39;;
-  });
-&lt;/script&gt;
-&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&gt;&lt;/script&gt;</code></pre>
-<p>同时因为自己乱找解决办法, 决定清理依赖. 其实大体都是注入mathJax的支持, 只不过想用插件把配置统一管理到站点下的配置文件里. 同时有的人可能想要切换主题, 因此一般也不直接修改theme下的代码.<br>这里就不纠结了, 直接修改代码, 节省时间.</p>
-<pre><code class="cmd">npm uninstall hexo-inject
-npm uninstall hexo-math
-npm uninstall hexo-renderer-mathjax
-rm -rf node_modules
-npm install</code></pre>
-<h2 id="替换banner"><a href="#替换banner" class="headerlink" title="替换banner"></a>替换banner</h2><p>大早上的被鸟叫吵醒, 起来解决了下hexo-math的问题, 顺便换了个banner. banner图片来自2014年厦门大学, 化学竞赛的时候, 早上起来逛了一圈厦大.</p>
-<h2 id="添加canvas-nest"><a href="#添加canvas-nest" class="headerlink" title="添加canvas-nest"></a>添加canvas-nest</h2><p>我还挺喜欢这个动效的, 但是好像有个css层级问题, 导致看不见效果. 后来发现应该是个颜色问题. 页面中<code>#wrap</code>这个标签还包含了<code>.outer</code>.<br>wrap的颜色和outer的颜色会叠加. 而原来之所以没有明显的颜色界线是因为默认颜色#eee, alpha通道为1. 不透明, 导致一开始添加<code>canvas-nest</code>时没有直接看到效果.<br>而调整alpha通道, 由于两个标签(图层)叠加alpha通道, 产生了颜色界线. </p>
-<p><img src="/images/alpha.png" alt="透明度界线"></p>
-<p><img src="/images/web-compose.png" alt="#wrap包裹着.outer"><br>通过区别<code>#wrap</code>和<code>.body</code>的颜色, 调整<code>#wrap</code>的alpha通道为0解决</p>
-<h2 id="查看github-仓库大小"><a href="#查看github-仓库大小" class="headerlink" title="查看github 仓库大小"></a>查看github 仓库大小</h2><p>由于github pages是有大小限制的, 可能图片还得换地方.<br>查看<a href="https://stackoverflow.com/a/8679592" target="_blank" rel="noopener">repo大小</a></p>
-<pre><code>api.github.com
-GET /repos/:user/:repo</code></pre><p><a href="https://api.github.com/repos/lonenso/lonenso.github.io" target="_blank" rel="noopener">https://api.github.com/repos/lonenso/lonenso.github.io</a></p>
-<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO?"></a>TODO?</h2><ul>
-<li><input checked="" disabled="" type="checkbox"> 评论集成</li>
-<li><input disabled="" type="checkbox"> 图片添加</li>
-<li><input checked="" disabled="" type="checkbox"> 阅读全文</li>
-<li><input checked="" disabled="" type="checkbox"> 回到顶部</li>
-<li><input checked="" disabled="" type="checkbox"> RSS Feed</li>
-<li><input checked="" disabled="" type="checkbox"> 公式支持</li>
-<li><input disabled="" type="checkbox"> 代码折叠</li>
-<li><input disabled="" type="checkbox"> 代码复制</li>
-<li><input disabled="" type="checkbox"> TOC</li>
-<li><input checked="" disabled="" type="checkbox"> 替换默认banner</li>
-<li><input checked="" disabled="" type="checkbox"> 添加canvas-nest</li>
-<li><input disabled="" type="checkbox"> 锚点支持</li>
-</ul>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
-<li><a href="https://pages.github.com/" target="_blank" rel="noopener">https://pages.github.com/</a></li>
-<li><a href="http://hexo.io/" target="_blank" rel="noopener">http://hexo.io/</a></li>
-<li><a href="https://www.zhihu.com/question/21193762" target="_blank" rel="noopener">https://www.zhihu.com/question/21193762</a></li>
-<li><a href="https://github.com/hexojs/hexo-generator-feed" target="_blank" rel="noopener">https://github.com/hexojs/hexo-generator-feed</a></li>
-<li><a href="https://stackoverflow.com/a/8679592" target="_blank" rel="noopener">https://stackoverflow.com/a/8679592</a></li>
-<li><a href="https://github.com/mathjax/MathJax" target="_blank" rel="noopener">https://github.com/mathjax/MathJax</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/startup/" data-id="ckaqomyzo000p3osrf7kq6mix" class="article-share-link">分享</a>
-      
-      <a href="https://lonenso.github.io/2020/05/12/startup/#disqus_thread" class="article-comment-link">留言</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/" rel="tag">Blog</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
+  </nav>
 
 </section>
         
@@ -805,7 +798,7 @@ GET /repos/:user/:repo</code></pre><p><a href="https://api.github.com/repos/lone
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
     </div>
   </div>
 
@@ -816,6 +809,10 @@ GET /repos/:user/:repo</code></pre><p><a href="https://api.github.com/repos/lone
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/07/17/mysql-crashcourse/">MySQL必知必会笔记</a>
+          </li>
         
           <li>
             <a href="/2020/05/20/leetcode-1453/">1453. Maximum Number of Darts Inside of a Circular Dartboard</a>
@@ -831,10 +828,6 @@ GET /repos/:user/:repo</code></pre><p><a href="https://api.github.com/repos/lone
         
           <li>
             <a href="/2020/05/13/fix-garbled/">LC_ALL=C 解决语言乱码</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/13/linux-startup/">limits.conf和rc.local加载顺序</a>
           </li>
         
       </ul>
