@@ -111,7 +111,7 @@ ga('send', 'pageview');
 <li>Limit 语法, Limit 3, 4的语义并不清晰, 直接. 由于这个原因, MySQL 5 支持Limit的另一种语法, LIMIT 4 OFFSET 3</li>
 <li>除了”%”以外, 还有一个通配符”_”, 用来匹配单个字符.</li>
 <li>经常需要汇总数据而不需要把所有记录都检索出来, 为此提供专门的函数. 返回数据再进行处理是对时间/处理资源和带宽的浪费.</li>
-<li>表的联结, MySQL无OUTER JOIN</li>
+<li>表的联结, MySQL无OUTER JOIN<img src="/2020/07/17/mysql-crashcourse/sql_joins.png" class=""></li>
 <li>在多次对同一张表进行子查询时, 可以通过别名进行自联结. 在有需要的情况下, 比较两种语句的性能.</li>
 <li>组合查询, 将同样列不同语句的查询结果拼接在一起. </li>
 <li>全文本搜索, MyISAM引擎支持, 性能好, 但不支持事务. InnoDB支持事务但不支持全文本搜索. 外键跨引擎可能不行. </li>
@@ -191,7 +191,7 @@ where a2.name = &quot;aaa&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/07/17/mysql-crashcourse/" data-id="ckcpr23ac000tzwsr264d2moa" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/07/17/mysql-crashcourse/" data-id="ckcpr3kuu000vxksrclcnc87d" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/07/17/mysql-crashcourse/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -256,7 +256,7 @@ where a2.name = &quot;aaa&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/20/leetcode-1453/" data-id="ckcpr23a8000nzwsrf6dod9qs" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/20/leetcode-1453/" data-id="ckcpr3kul000nxksr9rsqdngg" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/20/leetcode-1453/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -341,7 +341,7 @@ where a2.name = &quot;aaa&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/19/ita-heap/" data-id="ckcpr23a4000lzwsrdapydhmk" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/19/ita-heap/" data-id="ckcpr3kui000lxksrafinfhm9" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/19/ita-heap/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -391,7 +391,7 @@ where a2.name = &quot;aaa&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/14/starwars/" data-id="ckcpr23as0012zwsr1vtzdk17" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/14/starwars/" data-id="ckcpr3kuz0012xksrc7u72grd" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/14/starwars/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -441,7 +441,7 @@ where a2.name = &quot;aaa&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/fix-garbled/" data-id="ckcpr239v000gzwsras3e5h93" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/fix-garbled/" data-id="ckcpr3ku8000gxksrbpqmdcol" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/fix-garbled/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -499,7 +499,7 @@ where a2.name = &quot;aaa&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="ckcpr23a9000pzwsrffzdbwli" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/linux-startup/" data-id="ckcpr3kun000pxksrcx8m8u8r" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/linux-startup/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -553,7 +553,7 @@ where a2.name = &quot;aaa&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="ckcpr23a0000izwsrfhrehz2x" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/go-cmd-trap/" data-id="ckcpr3kud000ixksr5g5w1umj" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/go-cmd-trap/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -621,7 +621,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="ckcpr23ah000vzwsr7bnv96yo" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/13/openssl-issue/" data-id="ckcpr3kuq000txksr0lrs16hw" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/13/openssl-issue/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -678,7 +678,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="ckcpr239p000fzwsr4cv4c3ts" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/clean-bookmark/" data-id="ckcpr3ku5000fxksr8hvb71hy" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/clean-bookmark/#disqus_thread" class="article-comment-link">留言</a>
       
@@ -740,7 +740,7 @@ perl -MCPAN -e shell</code></pre><p>一路yes, 到cpan[1]</p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="ckcpr23az0015zwsr3jdt2ddo" class="article-share-link">分享</a>
+      <a data-url="https://lonenso.github.io/2020/05/12/wfh/" data-id="ckcpr3kvd0015xksrdos735sp" class="article-share-link">分享</a>
       
       <a href="https://lonenso.github.io/2020/05/12/wfh/#disqus_thread" class="article-comment-link">留言</a>
       
